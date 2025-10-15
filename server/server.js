@@ -15,6 +15,11 @@ app.use(cors());
 app.use(express.json());
 console.log('Middleware configured');
 
+// Routes
+const authRoutes = require('./routes/auth');
+app.use('/api/auth', authRoutes);
+console.log('Auth routes configured');
+
 // Create DB pool
 const { Pool } = require('pg');
 const pool = new Pool({

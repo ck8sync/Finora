@@ -13,20 +13,20 @@ function MarketHighlight({ type, title, content, icon }) {
   const IconComponent = icons[icon] || TrendingUpIcon
 
   return (
-    <Card sx={{ height: '100%' }}>
+    <Card sx={{ height: '100%', boxShadow: 3, borderRadius: 2 }}>
       <CardContent>
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
           <IconComponent
-            sx={{ fontSize: 24, color: 'primary.main', mr: 1 }}
+            sx={{ fontSize: 30, color: 'primary.main', mr: 2 }}
           />
-          <Typography variant="subtitle1" fontWeight="medium">
+          <Typography variant="h6" fontWeight="bold">
             {type}
           </Typography>
         </Box>
-        <Typography variant="h6" gutterBottom>
+        <Typography variant="h5" gutterBottom>
           {title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body1" color="text.secondary">
           {content}
         </Typography>
       </CardContent>

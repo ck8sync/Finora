@@ -24,111 +24,62 @@ function Footer() {
       component="footer"
       sx={{
         bgcolor: 'background.paper',
-        py: 6,
-        borderTop: 1,
-        borderColor: 'divider',
+        py: 4,
+        textAlign: 'center',
       }}
     >
-      <Container maxWidth="lg">
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" color="primary" gutterBottom>
-              Finora Hub
-            </Typography>
-            <Typography variant="body2" color="text.secondary" paragraph>
-              An 8sync Hive Initiative
-            </Typography>
-            <Box sx={{ mt: 2 }}>
-              <IconButton
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener"
-              >
-                <LinkedInIcon />
-              </IconButton>
-              <IconButton
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener"
-              >
-                <TwitterIcon />
-              </IconButton>
-              <IconButton
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener"
-              >
-                <YouTubeIcon />
-              </IconButton>
-              <IconButton
-                href="https://wa.me/share"
-                target="_blank"
-                rel="noopener"
-              >
-                <WhatsAppIcon />
-              </IconButton>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom>
-              Quick Links
-            </Typography>
-            <Box>
-              {quickLinks.map((link) => (
-                <Link
-                  key={link.title}
-                  href={link.href}
-                  sx={{
-                    display: 'block',
-                    color: 'text.secondary',
-                    textDecoration: 'none',
-                    mb: 1,
-                    '&:hover': {
-                      color: 'primary.main',
-                    },
-                  }}
-                >
-                  {link.title}
-                </Link>
-              ))}
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom>
-              Legal
-            </Typography>
-            <Box>
-              {legalLinks.map((link) => (
-                <Link
-                  key={link.title}
-                  href={link.href}
-                  sx={{
-                    display: 'block',
-                    color: 'text.secondary',
-                    textDecoration: 'none',
-                    mb: 1,
-                    '&:hover': {
-                      color: 'primary.main',
-                    },
-                  }}
-                >
-                  {link.title}
-                </Link>
-              ))}
-            </Box>
-          </Grid>
-        </Grid>
-        <Box sx={{ mt: 4, pt: 2, borderTop: 1, borderColor: 'divider' }}>
+      <Container maxWidth="md">
+        <Typography variant="h6" color="primary" gutterBottom sx={{ fontWeight: '700' }}>
+          Finora Hub
+        </Typography>
+        <Typography variant="body2" color="text.secondary" paragraph>
+          Empowering your market journey with clarity and confidence.
+        </Typography>
+        <Box sx={{ mt: 2, display: 'flex', justifyContent: 'center' }}>
+          <IconButton
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener"
+            sx={{ color: 'primary.main' }}
+          >
+            <LinkedInIcon />
+          </IconButton>
+          <IconButton
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener"
+            sx={{ color: 'primary.main' }}
+          >
+            <TwitterIcon />
+          </IconButton>
+          <IconButton
+            href="https://youtube.com"
+            target="_blank"
+            rel="noopener"
+            sx={{ color: 'primary.main' }}
+          >
+            <YouTubeIcon />
+          </IconButton>
+          <IconButton
+            href="https://wa.me/share"
+            target="_blank"
+            rel="noopener"
+            sx={{ color: 'primary.main' }}
+          >
+            <WhatsAppIcon />
+          </IconButton>
+        </Box>
+        <Box sx={{ mt: 4, textAlign: 'center' }}>
           <Typography
             variant="body2"
             color="text.secondary"
-            align="center"
             paragraph
+            sx={{ fontWeight: '600' }}
           >
-            © 2025 Finora Hub — An 8sync Hive Initiative.
+            © 2025 Finora Hub - An 8sync Hive Initiative.
           </Typography>
-          <Typography variant="body2" color="text.secondary" align="center">
-            All content is for educational purposes only.
+          <Typography variant="body2" color="text.secondary">
+            For educational purposes only. Not financial advice.
           </Typography>
         </Box>
       </Container>

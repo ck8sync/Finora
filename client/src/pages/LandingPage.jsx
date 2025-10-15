@@ -16,6 +16,7 @@ import MarketTicker from '../components/MarketTicker'
 import PricingCard from '../components/PricingCard'
 import MarketHighlight from '../components/MarketHighlight'
 import Footer from '../components/Footer'
+import { motion } from 'framer-motion'
 
 function Feature({ icon, title, description }) {
   return (
@@ -36,102 +37,161 @@ function LandingPage() {
     <Box sx={{ flexGrow: 1 }}>
       {/* Market Ticker */}
       <MarketTicker />
+{/* Hero Section */}
+<Box
+sx={{
+  bgcolor: 'primary.main',
+  color: 'white',
+  py: 12,
+  textAlign: 'center',
+  position: 'relative',
+  overflow: 'hidden',
+}}
+>
+{/* Animated Background */}
+<motion.div
+  style={{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    background: 'linear-gradient(45deg, #6A1B9A, #F48FB1)',
+    opacity: 0.3,
+    zIndex: 0,
+  }}
+  animate={{
+    x: ['-100%', '100%'],
+    rotate: [0, 360],
+    scale: [1, 1.2, 1],
+  }}
+  transition={{
+    duration: 10,
+    repeat: Infinity,
+    ease: 'linear',
+  }}
+/>
+<Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
+  <Typography
+    component="h1"
+    variant="h3"
+    sx={{ mb: 4, fontWeight: '700', color: '#fff' }}
+  >
+    Level Up Your Investing IQ
+  </Typography>
+  <Typography variant="h6" sx={{ mb: 4, px: { xs: 2, md: 8 }, color: '#eee' }}>
+    Your fast track to market mastery. Get daily insights, weekly breakdowns, and bite-sized lessons.
+  </Typography>
+  <Box sx={{ mb: 4 }}>
+    <Button
+      component={RouterLink}
+      to="/register"
+      variant="contained"
+      color="secondary"
+      size="large"
+      sx={{
+        mr: 2,
+        mb: { xs: 2, sm: 0 },
+        fontWeight: '600',
+        borderRadius: '24px',
+        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3)',
+      }}
+    >
+      🚀 Get Started Now
+    </Button>
+  </Box>
+  <Typography variant="subtitle1" sx={{ mt: 2, opacity: 0.9, color: '#ccc' }}>
+    For education, not trading advice.
+  </Typography>
+</Container>
+</Box>
 
-      {/* Hero Section */}
-      <Box
-        sx={{
-          bgcolor: 'primary.main',
-          color: 'white',
-          py: 8,
-          textAlign: 'center',
-          background: 'linear-gradient(45deg, #008080 30%, #20B2AA 90%)',
-        }}
+    {/* Value Propositions */}
+    <Container sx={{ py: 10 }} maxWidth="lg">
+      <Typography
+        component="h2"
+        variant="h4"
+        align="center"
+        color="text.primary"
+        gutterBottom
+        sx={{ mb: 8, fontWeight: '600' }}
       >
-        <Container maxWidth="md">
-          <Typography
-            component="h1"
-            variant="h2"
-            sx={{ mb: 4, fontWeight: 'bold' }}
-          >
-            Smarter Markets. Simplified Insights.
-          </Typography>
-          <Typography variant="h5" sx={{ mb: 4, px: { xs: 2, md: 8 } }}>
-            Stay ahead with daily market briefs, weekly recaps, and real-time
-            trends from India and across the globe — all in one clean,
-            interactive dashboard.
-          </Typography>
-          <Box sx={{ mb: 4 }}>
-            <Button
-              component={RouterLink}
-              to="/brief"
-              variant="contained"
-              color="secondary"
-              size="large"
-              sx={{ mr: 2, mb: { xs: 2, sm: 0 } }}
-            >
-              🚀 Get Today's Market Brief
-            </Button>
-          </Box>
-          <Typography variant="subtitle1" sx={{ mt: 2, opacity: 0.9 }}>
-            Designed for learning and awareness — not trading advice.
-          </Typography>
-        </Container>
-      </Box>
-
-      {/* Value Propositions */}
-      <Container sx={{ py: 8 }} maxWidth="lg">
-        <Typography
-          component="h2"
-          variant="h3"
-          align="center"
-          color="text.primary"
-          gutterBottom
-          sx={{ mb: 6 }}
-        >
-          Your Market Dashboard, Reimagined.
-        </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Feature
-              icon={
-                <ArticleIcon
-                  sx={{ fontSize: 60, color: 'primary.main', mb: 2 }}
-                />
-              }
-              title="Daily Market Brief"
-              description="Get a crisp summary of Indian & global cues, currency moves, and sentiment analysis — all before your first coffee."
-            />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Feature
-              icon={
-                <TimelineIcon
-                  sx={{ fontSize: 60, color: 'primary.main', mb: 2 }}
-                />
-              }
-              title="Weekly Market Recap"
-              description="Understand sector shifts, fund flows, and key takeaways with short, actionable summaries and video briefs."
-            />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Feature
-              icon={
-                <SchoolIcon
-                  sx={{ fontSize: 60, color: 'primary.main', mb: 2 }}
-                />
-              }
-              title="Learn Market in 3 Minutes"
-              description="Simplified lessons on how to read charts, sector movements, and investor behavior — to help you build knowledge, not tips."
-            />
-          </Grid>
+        Your All-Access Pass to Market Insights
+      </Typography>
+      <Grid container spacing={6}>
+        <Grid item xs={12} md={4}>
+          <Feature
+            icon={
+              <ArticleIcon
+                sx={{ fontSize: 50, color: 'primary.main', mb: 3 }}
+              />
+            }
+            title="Daily Market Brief"
+            description="Start your day with a concise snapshot of global markets, key trends, and expert analysis."
+          />
         </Grid>
-      </Container>
+        <Grid item xs={12} md={4}>
+          <Feature
+            icon={
+              <TimelineIcon
+                sx={{ fontSize: 50, color: 'primary.main', mb: 3 }}
+              />
+            }
+            title="Weekly Market Recap"
+            description="Dive deeper into sector performance, investment strategies, and actionable takeaways."
+          />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Feature
+            icon={
+              <SchoolIcon
+                sx={{ fontSize: 50, color: 'primary.main', mb: 3 }}
+              />
+            }
+            title="3-Minute Market Lessons"
+            description="Unlock essential investing concepts with quick, easy-to-understand lessons."
+          />
+        </Grid>
+      </Grid>
+    </Container>
 
       {/* Pricing Section */}
       <Box sx={{ bgcolor: 'background.paper', py: 8 }}>
         <Container maxWidth="lg">
           <Typography variant="h3" align="center" gutterBottom>
-            Everything is Free for You
+            <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: '600' }}>
+              Unlock Premium Insights - Absolutely Free!
+            </Typography>
+            </Typography> {/* Closing tag for Typography on line 161 */}
+            <Typography
+              variant="h6"
+              align="center"
+              color="text.secondary"
+              sx={{ mb: 6 }}
+            >
+              Get exclusive access to advanced market analysis and personalized learning tools.
+            </Typography>
+            <Grid container spacing={4} justifyContent="center">
+              <Grid item xs={12} md={6} lg={5}>
+                <PricingCard
+                  plan="Free Access"
+                  price="0"
+                  features={[
+                    'Daily Market Briefs',
+                    'Weekly Deep Dives',
+                    'Interactive Learning Modules',
+                  ]}
+                  buttonText="Get Instant Access"
+                />
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
+
+      {/* Market Highlights */}
+      <Container sx={{ py: 8 }} maxWidth="lg">
+          <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: '600' }}>
+            Market Pulse: Stay Ahead of the Curve
           </Typography>
           <Typography
             variant="h6"
@@ -139,105 +199,70 @@ function LandingPage() {
             color="text.secondary"
             sx={{ mb: 6 }}
           >
-            We're committed to providing you with the best market insights and educational analytics at no cost.
+            Get instant insights into key market trends and developments.
           </Typography>
-          <Grid container spacing={4} justifyContent="center">
-            <Grid item xs={12} md={6} lg={5}>
-              <PricingCard
-                plan="Free Plan"
-                price="0"
-                features={[
-                  'Daily Market Brief',
-                  '3-Minute Learning Blog',
-                  'Access to Public Insights',
-                ]}
-                buttonText="Start Free Today"
+          <Grid container spacing={4}>
+            <Grid item xs={12} md={4}>
+              <MarketHighlight
+                type="Sector Spotlight"
+                title="Tech & Pharma on the Rise"
+                content="Discover the driving forces behind the tech and healthcare sectors."
+                icon="trend"
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <MarketHighlight
+                type="Stock to Watch"
+                title="Reliance Surges Ahead"
+                content="Uncover the factors propelling Reliance's impressive Q2 performance."
+                icon="stock"
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <MarketHighlight
+                type="Market Insights"
+                title="Top 3 Things to Track"
+                content="Stay informed about inflation, earnings, and crude oil's impact on the market."
+                icon="watch"
               />
             </Grid>
           </Grid>
+          <Box sx={{ textAlign: 'center', mt: 4 }}>
+            <Button
+              component={RouterLink}
+              to="/highlights"
+              variant="outlined"
+              color="primary"
+              size="large"
+              endIcon={<TimelineIcon />}
+              sx={{ borderRadius: '24px', fontWeight: '600' }}
+            >
+              Explore More Highlights
+            </Button>
+          </Box>
         </Container>
-      </Box>
-
-      {/* Market Highlights */}
-      <Container sx={{ py: 8 }} maxWidth="lg">
-        <Typography variant="h3" align="center" gutterBottom>
-          Stay in Sync with What Moves the Market
-        </Typography>
-        <Typography
-          variant="h6"
-          align="center"
-          color="text.secondary"
-          sx={{ mb: 6 }}
-        >
-          Quick visual summaries to help you understand market trends — for
-          educational awareness only.
-        </Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <MarketHighlight
-              type="Sector Trend"
-              title="Tech & Pharma Leading Gains"
-              content="Technology and healthcare sectors showing momentum with positive market sentiment."
-              icon="trend"
-            />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <MarketHighlight
-              type="Focus Stock"
-              title="Reliance up 2.4%"
-              content="Q2 results beat estimates with strong performance in retail and digital services."
-              icon="stock"
-            />
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <MarketHighlight
-              type="Watch List"
-              title="3 Things to Watch"
-              content="Inflation print, IT earnings, and crude prices are key factors to monitor."
-              icon="watch"
-            />
-          </Grid>
-        </Grid>
-        <Box sx={{ textAlign: 'center', mt: 4 }}>
-          <Button
-            component={RouterLink}
-            to="/highlights"
-            variant="outlined"
-            color="primary"
-            size="large"
-            endIcon={<TimelineIcon />}
-          >
-            See All Market Highlights
-          </Button>
-        </Box>
-      </Container>
 
       {/* About Section */}
       <Box sx={{ bgcolor: 'background.paper', py: 8 }}>
         <Container maxWidth="md">
-          <Typography variant="h3" align="center" gutterBottom>
-            About Finora Hub
-          </Typography>
-          <Typography variant="body1" align="center" paragraph sx={{ mb: 4 }}>
-            Finora Hub is your synchronized source of market intelligence
-            — blending data, design, and daily discipline. We believe clarity
-            creates confidence — that's why every brief, chart, and analysis
-            is curated to help you learn, understand, and interpret markets
-            more effectively.
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            align="center"
-            color="text.secondary"
-            sx={{ mb: 4 }}
-          >
-            Built by 8sync Hive — Synchronized Minds, Seamless Innovation.
-            <br />
-            We provide educational market insights only, not financial or
-            investment advice.
-          </Typography>
-        </Container>
-      </Box>
+          <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: '600' }}>
+              About Finora Hub
+            </Typography>
+            <Typography variant="body1" align="center" paragraph sx={{ mb: 4 }}>
+              Your go-to platform for mastering the markets. We deliver clear, concise, and engaging insights to empower your investment journey.
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              align="center"
+              color="text.secondary"
+              sx={{ mb: 4 }}
+            >
+              Created by 8sync Hive — Where Innovation Meets Insight.
+              <br />
+              Empowering you with knowledge, not financial advice.
+            </Typography>
+          </Container>
+        </Box>
 
       {/* Disclaimer Section */}
       <Container sx={{ py: 8 }} maxWidth="md">
@@ -264,7 +289,6 @@ function LandingPage() {
       {/* Footer */}
       <Footer />
     </Box>
-  )
+  );
 }
-
-export default LandingPage
+export default LandingPage;
