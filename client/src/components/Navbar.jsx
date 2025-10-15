@@ -30,15 +30,6 @@ function Navbar() {
           <Button color="inherit" component={RouterLink} to="/about">
             About
           </Button>
-          <Button
-            color="secondary"
-            variant="contained"
-            component={RouterLink}
-            to="/premium"
-            sx={{ ml: 1 }}
-          >
-            Go Premium
-          </Button>
         </Box>
       </Toolbar>
     </AppBar>

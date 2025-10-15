@@ -71,15 +71,6 @@ function LandingPage() {
             >
               🚀 Get Today's Market Brief
             </Button>
-            <Button
-              component={RouterLink}
-              to="/premium"
-              variant="outlined"
-              color="inherit"
-              size="large"
-            >
-              💼 Upgrade to Premium
-            </Button>
           </Box>
           <Typography variant="subtitle1" sx={{ mt: 2, opacity: 0.9 }}>
             Designed for learning and awareness — not trading advice.
@@ -140,7 +131,7 @@ function LandingPage() {
       <Box sx={{ bgcolor: 'background.paper', py: 8 }}>
         <Container maxWidth="lg">
           <Typography variant="h3" align="center" gutterBottom>
-            Choose Your Pulse — Free or Premium.
+            Everything is Free for You
           </Typography>
           <Typography
             variant="h6"
@@ -148,8 +139,7 @@ function LandingPage() {
             color="text.secondary"
             sx={{ mb: 6 }}
           >
-            Start free, stay informed. Upgrade when you're ready for deeper
-            insights and educational analytics.
+            We're committed to providing you with the best market insights and educational analytics at no cost.
           </Typography>
           <Grid container spacing={4} justifyContent="center">
             <Grid item xs={12} md={6} lg={5}>
@@ -162,21 +152,6 @@ function LandingPage() {
                   'Access to Public Insights',
                 ]}
                 buttonText="Start Free Today"
-              />
-            </Grid>
-            <Grid item xs={12} md={6} lg={5}>
-              <PricingCard
-                plan="Premium Plan"
-                price="299"
-                features={[
-                  'All Free Features',
-                  'Weekly Video Recap',
-                  'Focus Stock of the Day',
-                  'Sentiment Dashboard',
-                  'Case Studies & Sector Maps',
-                ]}
-                buttonText="Go Premium Now"
-                recommended
               />
             </Grid>
           </Grid>

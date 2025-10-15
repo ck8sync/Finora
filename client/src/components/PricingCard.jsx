@@ -23,24 +23,6 @@ function PricingCard({ plan, price, features, buttonText, recommended }) {
         borderColor: 'primary.main',
       }}
     >
-      {recommended && (
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 12,
-            right: 12,
-            bgcolor: 'primary.main',
-            color: 'white',
-            px: 2,
-            py: 0.5,
-            borderRadius: 1,
-          }}
-        >
-          <Typography variant="caption" fontWeight="medium">
-            RECOMMENDED
-          </Typography>
-        </Box>
-      )}
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography variant="h5" component="h2" gutterBottom fontWeight="bold">
           {plan}
