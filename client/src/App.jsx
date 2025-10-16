@@ -7,7 +7,6 @@ import ResetPassword from './components/ResetPassword';
 import { Box } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
-import RequireAuth from './components/RequireAuth';
 
 function App() {
   return (
@@ -18,9 +17,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
-        <Route element={<RequireAuth />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Route>
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
       </Box>
     </ThemeProvider>
