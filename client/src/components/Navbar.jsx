@@ -32,6 +32,9 @@ function Navbar() {
           <Button color="secondary" component={RouterLink} to="/about" sx={{ fontWeight: 600, borderRadius: '24px' }}>
             About
           </Button>
+          <Button color="secondary" component={RouterLink} to="/login" sx={{ fontWeight: 600, borderRadius: '24px' }}>
+            Login
+          </Button>
         </Box>
       </Toolbar>
     </AppBar>

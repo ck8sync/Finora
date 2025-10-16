@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 import './LandingPage.css'; // Import the CSS file
 
 function LandingPage() {
@@ -29,9 +30,9 @@ function LandingPage() {
                     <button className="theme-toggle-btn" onClick={toggleTheme}>
                         <span id="theme-icon">☀️</span>
                     </button>
-                    <a href="#" className="nav-button">
+                    <Link to="/login" className="nav-button"> {/* Use Link for navigation */}
                         Login / Register
-                    </a>
+                    </Link>
                 </div>
             </header>
 
@@ -88,7 +89,7 @@ function LandingPage() {
                     <li>Interactive Learning Modules</li>
                 </ul>
                 
-                <a href="#" className="access-button">Get Free Access</a>
+                <Link to="/sign-up" className="access-button">Get Free Access</Link> {/* Use Link for navigation */}
             </div>
 
             <section className="pulse-section">

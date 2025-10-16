@@ -2,40 +2,41 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { Pool } = require('pg');
-
-// Database configuration
-const pool = new Pool({
-  user: process.env.PG_USER || 'postgres',
-  host: process.env.PG_HOST || 'localhost',
-  database: process.env.PG_DATABASE || 'finora',
-  password: process.env.PG_PASSWORD || 'yourpassword',
-  port: process.env.PG_PORT ? Number(process.env.PG_PORT) : 5432,
-});
+const User = require('../models/User');
 
 // Register endpoint
 router.post('/register', async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    // Check if user already exists
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Insert the user into the database
-    const result = await pool.query(
-      'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *',
-      [email, hashedPassword]
-    );
+    // Create new user
+    user = new User({
+      email,
+      password: hashedPassword,
+    });
 
-    const user = result.rows[0];
+    await user.save();
 
     // Generate a JWT token
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     res.status(201).json({ message: 'User registered successfully', token });
   } catch (error) {
     console.error('Error registering user:', error);
-    res.status(500).json({ message: 'Registration failed' });
+    if (error.code === 11000) {
+      res.status(400).json({ message: 'Email already exists' });
+    } else {
+      res.status(500).json({ message: 'Registration failed' });
+    }
   }
 });
 
@@ -45,8 +46,7 @@ router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     // Find the user in the database
-    const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-    const user = result.rows[0];
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(401).json({ message: 'Invalid credentials' });
@@ -60,12 +60,73 @@ router.post('/login', async (req, res) => {
     }
 
     // Generate a JWT token
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     res.status(200).json({ message: 'Login successful', token });
   } catch (error) {
     console.error('Error logging in:', error);
     res.status(500).json({ message: 'Login failed' });
+  }
+});
+
+// Forgot password endpoint
+router.post('/forgot-password', async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    // Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Generate password reset token
+    const resetToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    // Set reset token and expiry
+    user.resetToken = resetToken;
+    user.resetTokenExpiry = Date.now() + 3600000; // 1 hour
+    await user.save();
+
+    // Send email to user with reset link
+    const resetLink = `http://localhost:5173/reset-password/${resetToken}`; // TODO: Use environment variable for client URL
+    console.log(resetLink); // TODO: Implement email sending
+
+    res.status(200).json({ message: 'Password reset link sent to your email' });
+  } catch (error) {
+    console.error('Error handling forgot password:', error);
+    res.status(500).json({ message: 'Forgot password failed' });
+  }
+});
+
+// Reset password endpoint
+router.post('/reset-password', async (req, res) => {
+  try {
+    const { token, password } = req.body;
+
+    // Find user with reset token and expiry
+    const user = await User.findOne({
+      resetToken: token,
+      resetTokenExpiry: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid or expired token' });
+    }
+
+    // Hash the new password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Update user's password and remove reset token
+    user.password = hashedPassword;
+    user.resetToken = undefined;
+    user.resetTokenExpiry = undefined;
+    await user.save();
+
+    res.status(200).json({ message: 'Password reset successfully' });
+  } catch (error) {
+    console.error('Error handling reset password:', error);
+    res.status(500).json({ message: 'Reset password failed' });
   }
 });
 

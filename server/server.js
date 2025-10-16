@@ -1,10 +1,24 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-
+const mongoose = require('mongoose');
 // Load env vars
 dotenv.config();
 console.log('Environment loaded');
+
+// Connect to MongoDB
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+    process.exit(1);
+  }
+};
 
 // Initialize express
 const app = express();
@@ -20,16 +34,9 @@ const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 console.log('Auth routes configured');
 
-// Create DB pool
-const { Pool } = require('pg');
-const pool = new Pool({
-  user: process.env.PG_USER || 'postgres',
-  host: process.env.PG_HOST || 'localhost',
-  database: process.env.PG_DATABASE || 'finora',
-  password: process.env.PG_PASSWORD || 'yourpassword',
-  port: process.env.PG_PORT ? Number(process.env.PG_PORT) : 5432,
-});
-console.log('Database pool created');
+const protectedRoutes = require('./routes/protected');
+app.use('/api/protected', protectedRoutes);
+console.log('Protected routes configured');
 
 // Root route
 app.get('/', (req, res) => {
@@ -40,30 +47,31 @@ app.get('/', (req, res) => {
 // Health check route
 app.get('/api/health', async (req, res) => {
   console.log('GET /api/health called');
-  try {
-    await pool.query('SELECT 1');
+  if (mongoose.connection.readyState === 1) {
     res.json({ healthy: true, db: 'connected' });
-  } catch (err) {
-    console.error('DB health check failed:', err.message);
-    res.status(500).json({ healthy: false, error: err.message });
+  } else {
+    res.status(500).json({ healthy: false, error: 'MongoDB not connected' });
   }
 });
 
 // Start server
 const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => {
-  console.log(`Finora server listening on port ${PORT}`);
-});
 
-// Handle errors
-server.on('error', (error) => {
-  console.error('Server error:', error);
-});
+connectDB().then(() => {
+  const server = app.listen(PORT, () => {
+    console.log(`Finora server listening on port ${PORT}`);
+  });
 
-process.on('unhandledRejection', (error) => {
-  console.error('Unhandled rejection:', error);
-});
+  // Handle errors
+  server.on('error', (error) => {
+    console.error('Server error:', error);
+  });
 
-process.on('uncaughtException', (error) => {
-  console.error('Uncaught exception:', error);
+  process.on('unhandledRejection', (error) => {
+    console.error('Unhandled rejection:', error);
+  });
+
+  process.on('uncaughtException', (error) => {
+    console.error('Uncaught exception:', error);
+  });
 });

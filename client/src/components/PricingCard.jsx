@@ -10,6 +10,7 @@ import {
   Box,
 } from '@mui/material'
 import CheckIcon from '@mui/icons-material/Check'
+import { Link as RouterLink } from 'react-router-dom'
 
 function PricingCard({ plan, price, features, buttonText, recommended }) {
   return (
@@ -67,6 +68,8 @@ function PricingCard({ plan, price, features, buttonText, recommended }) {
           variant={recommended ? 'contained' : 'outlined'}
           color="secondary"
           size="large"
+          component={RouterLink}
+          to="/sign-up"
           sx={{
             borderRadius: '24px',
             fontWeight: '600',
