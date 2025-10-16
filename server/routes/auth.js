@@ -7,7 +7,7 @@ const User = require('../models/User');
 // Register endpoint
 router.post('/register', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, name, phone } = req.body;
 
     // Check if user already exists
     let user = await User.findOne({ email });

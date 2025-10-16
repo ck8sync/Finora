@@ -8,7 +8,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    e.preventDefault();
     try {
       const response = await fetch('http://localhost:5000/api/auth/login', { // TODO: Use environment variable for server URL
         method: 'POST',
@@ -34,31 +33,41 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Login</button>
+    <form className="auth-form active" id="login-form" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="login-email">Email or Username</label>
+        <input
+          type="text"
+          id="login-email"
+          required
+          placeholder="Enter your handle or email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="login-password">Password</label>
+        <input
+          type="password"
+          id="login-password"
+          required
+          placeholder="Your secret key"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+
+      <button type="submit" className="action-button">
+        🚀 GO LIVE
+      </button>
+
+      <div className="utility-links">
+        <a onClick={() => navigate('/register')} style={{cursor: 'pointer'}}>
+          Not registered? Sign Up.
+        </a>
         <a href="/forgot-password">Forgot Password?</a>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 };
 

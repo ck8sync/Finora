@@ -1,0 +1,161 @@
+/* -------------------- GEN Z VIBE COLORS (DEFAULT: DARK MODE) -------------------- */
+:root {
+    --bg-color: #121212; 
+    --card-color: #1f1f1f; 
+    --text-color: #e0e0e0; 
+    --light-text: #b0b0b0;
+    --primary-color: #9b59b6; /* Purple */
+    --secondary-color: #3498db; /* Blue */
+    --input-bg: #2c2c2c;
+    --border-color: #2c2c2c;
+    --font-family: 'Inter', sans-serif;
+}
+
+/* -------------------- LIGHT THEME OVERRIDES 💡 -------------------- */
+body.light-theme {
+    --bg-color: #f4f7fa; 
+    --card-color: #ffffff; 
+    --text-color: #333333; 
+    --light-text: #6c757d;
+    --primary-color: #8e44ad; 
+    --secondary-color: #2980b9; 
+    --input-bg: #e9ecef;
+    --border-color: #e9ecef;
+}
+
+/* -------------------- BASE STYLES -------------------- */
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* -------------------- Auth Container -------------------- */
+.auth-container {
+    width: 90%;
+    max-width: 400px;
+    background-color: var(--card-color);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+body.light-theme .auth-container {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+    text-align: center;
+    font-size: 2.2em;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    letter-spacing: -1px;
+}
+
+/* -------------------- Tab Navigation -------------------- */
+.tab-nav {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.tab-btn {
+    flex-grow: 1;
+    padding: 15px 0;
+    background: none;
+    border: none;
+    color: var(--light-text);
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.3s, border-bottom 0.3s;
+    text-transform: uppercase;
+}
+
+.tab-btn.active {
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+/* -------------------- Forms -------------------- */
+.auth-form.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+}
+
+/* -------------------- Action Button -------------------- */
+.action-button {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: var(--bg-color); 
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    text-transform: uppercase;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4);
+}
+
+.action-button:hover {
+    background-color: #8e44ad;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(155, 89, 182, 0.6);
+}
+
+/* -------------------- Utility Links -------------------- */
+.utility-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.utility-links a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.utility-links a:hover {
+    color: var(--primary-color);
+}
