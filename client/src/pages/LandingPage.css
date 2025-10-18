@@ -1,17 +1,18 @@
 /* -------------------- GEN Z VIBE COLORS (DEFAULT: DARK MODE) -------------------- */
 :root {
-    --bg-color: #0a0a0a; /* Darker background */
-    --card-color: #1a1a1a; /* Slightly lighter card for contrast */
-    --text-color: #ffffff; /* White text for maximum readability */
-    --light-text: #a0a0a0; /* Light grey for secondary text */
+    --bg-color: #0a0a0a;
+    --card-color: #1a1a1a;
+    --text-color: #ffffff;
+    --light-text: #a0a0a0;
     --primary-color: #9b59b6;
     --secondary-color: #3498db;
     --success-color: #2ecc71;
     --danger-color: #e74c3c;
     --border-color: #2c2c2c;
     --font-family: 'Inter', sans-serif;
-    --marquee-speed: 60s; /* Speed of the scroll */
+    --marquee-speed: 60s;
 }
+
 
 /* -------------------- LIGHT THEME OVERRIDES 💡 -------------------- */
 body.light-theme {
@@ -25,6 +26,7 @@ body.light-theme {
     --danger-color: #c0392b;
     --border-color: #e9ecef;
 }
+
 
 /* -------------------- BASE STYLES -------------------- */
 body {
@@ -41,54 +43,60 @@ body {
 
 .container {
     width: 100%;
-    max-width: 900px;
-    padding: 40px 20px;
+    max-width: 90vw;
+    padding: 4rem 2rem;
 }
 
 h2 {
-    font-size: 1.8em;
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
     color: var(--text-color);
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
     font-weight: 700;
 }
+
 .subtitle {
-    font-size: 1.1em;
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
     color: var(--light-text);
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
 }
+
 .disclaimer-small {
     font-size: 0.85em;
     color: var(--light-text);
-    margin-top: 5px;
+    margin: 4rem;
     border-left: 3px solid var(--primary-color);
-    padding-left: 10px;
+    padding-left: 0.6rem;
     display: inline-block; 
 }
+
 
 /* -------------------- Header and Navigation -------------------- */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 20px;
-    margin-bottom: 30px;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
     border-bottom: 1px solid var(--border-color);
 }
+
 .logo {
-    font-size: 2em;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
     font-weight: 800;
     color: var(--primary-color);
     letter-spacing: -1px; 
 }
+
 .nav-actions {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 1rem;
 }
+
 .nav-button {
     background-color: var(--secondary-color); 
     color: var(--bg-color); 
-    padding: 10px 20px;
+    padding: 0.6rem 1.2rem;
     border-radius: 50px; 
     text-decoration: none;
     font-weight: 700;
@@ -100,11 +108,12 @@ h2 {
     background-color: #2980b9;
     transform: scale(1.05); 
 }
+
 .theme-toggle-btn {
     background: none;
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
-    padding: 8px 12px;
+    padding: 0.5rem 0.8rem;
     border-radius: 50px;
     cursor: pointer;
     font-size: 1em;
@@ -115,15 +124,16 @@ h2 {
     color: var(--card-color);
 }
 
-/* -------------------- Market Ticker (RUNNING) -------------------- */
+
+/* -------------------- Market Ticker -------------------- */
 .market-ticker {
-    margin-bottom: 40px;
-    padding: 15px 0; /* Padding top/bottom, no side padding for seamless scroll */
+    margin-bottom: 2.5rem;
+    padding: 1rem 0;
     background-color: var(--card-color);
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    overflow: hidden; /* Crucial for hiding content outside the marquee */
-    white-space: nowrap; /* Keep all content on one line */
+    overflow: hidden;
+    white-space: nowrap;
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 body.light-theme .market-ticker {
@@ -132,9 +142,8 @@ body.light-theme .market-ticker {
 
 .ticker-inner {
     display: inline-block;
-    /* Apply the animation */
     animation: marquee var(--marquee-speed) linear infinite;
-    padding-right: 100%; /* Ensures a gap before the loop repeats */
+    padding-right: 100%;
 }
 
 @keyframes marquee {
@@ -143,17 +152,17 @@ body.light-theme .market-ticker {
 }
 
 .ticker-item {
-    display: inline-block; /* Aligns items horizontally */
+    display: inline-block;
     font-size: 1.1em;
     font-weight: 700;
-    align-items: center;
-    padding: 0 25px; /* Spacing between items */
+    padding: 0 1.5rem;
     color: var(--text-color);
 }
+
 .change {
     font-size: 0.9em;
-    margin-left: 8px;
-    padding: 3px 6px;
+    margin-left: 0.5rem;
+    padding: 0.2rem 0.4rem;
     border-radius: 4px;
     font-weight: 600;
 }
@@ -172,15 +181,14 @@ body.light-theme .down { background-color: rgba(192, 57, 43, 0.1); }
 /* -------------------- Hero Section -------------------- */
 .hero-section {
     text-align: center; 
-    margin-bottom: 40px; 
-    padding: 70px 30px; 
+    margin-bottom: 2.5rem; 
+    padding: 6vw 4vw;
     position: relative; 
     overflow: hidden; 
     border-radius: 20px; 
     background-color: var(--card-color); 
-    animation: fadeIn 1.5s ease-out;
-    opacity: 0; 
-    animation-fill-mode: forwards; 
+    animation: fadeIn 1.5s ease-out forwards;
+    opacity: 0;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5); 
     transition: background-color 0.3s, box-shadow 0.3s;
 }
@@ -196,243 +204,289 @@ body.light-theme .hero-section {
     width: 100%;
     height: 100%;
     background-image: url('../422093305_efb238c8-bbd2-4684-9110-84db0d0b96cc.jpg');
-    background-size: cover; 
-    background-position: center; 
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.4; 
-    z-index: -1; 
-    transition: opacity 0.3s;
-}
-body.light-theme .hero-section::before {
-    opacity: 0.4; 
+    opacity: 0.4;
+    z-index: -1;
 }
 
 .hero-section h2 {
-    font-size: 2.5em;
+    font-size: clamp(2rem, 5vw, 2.8rem);
     font-weight: 800;
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
     text-shadow: 0 0 5px rgba(155, 89, 182, 0.5); 
 }
+
 
 @keyframes fadeIn {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
 }
 
-/* -------------------- All-Access Pass Section -------------------- */
+
+/* -------------------- Offer Cards -------------------- */
 .access-section {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
 }
 
 .offer-cards {
     display: flex;
-    gap: 20px;
-    justify-content: center; 
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
 }
 
 .offer-card {
-    flex: 1;
-    max-width: 280px; 
-    padding: 30px;
+    flex: 1 1 300px;
+    max-width: 100%;
+    padding: 2rem;
     background-color: var(--card-color);
-    border-radius: 15px; 
+    border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     border: 1px solid var(--border-color);
-    
-    animation: slideUp 1s ease-out;
-    opacity: 0; 
+    animation: slideUp 1s ease-out forwards;
+    opacity: 0;
     transform: translateY(20px);
-    animation-fill-mode: forwards;
-    text-align: left; 
+    text-align: left;
     transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 body.light-theme .offer-card {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-
 .offer-card h3 {
     color: var(--secondary-color);
     font-weight: 700;
     border-bottom: 2px solid var(--secondary-color); 
-    padding-bottom: 5px;
-    margin-bottom: 15px;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
 }
-
-.card-1 { animation-delay: 0.1s; }
-.card-2 { animation-delay: 0.3s; }
-.card-3 { animation-delay: 0.5s; }
 
 @keyframes slideUp {
     100% { opacity: 1; transform: translateY(0); }
 }
 
+
 /* -------------------- Premium Unlock Section -------------------- */
 .premium-unlock {
     background-color: var(--primary-color);
-    color: var(--bg-color); 
-    padding: 40px;
+    color: var(--bg-color);
+    padding: 3rem;
     border-radius: 20px;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
     box-shadow: 0 4px 20px rgba(155, 89, 182, 0.6);
-    transition: background-color 0.3s, box-shadow 0.3s;
 }
 .premium-unlock h2 { color: var(--bg-color); }
 
 .premium-features {
-    list-style: none; 
+    list-style: none;
     padding: 0;
     display: flex;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 0; 
     font-weight: 600;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
     color: var(--bg-color);
 }
 
 .premium-features li {
-    padding: 0 15px;
+    padding: 0 1rem;
     position: relative;
 }
 
 .premium-features li::after {
     content: "|";
     position: absolute;
-    right: -2px;
+    right: -0.5rem;
     top: 50%;
     transform: translateY(-50%);
     font-weight: 700;
     opacity: 0.6;
 }
-
 .premium-features li:last-child::after {
-    content: none; 
+    content: none;
 }
 
 .access-button {
     background-color: var(--bg-color);
     color: var(--primary-color);
     border: none;
-    padding: 12px 30px;
+    padding: 0.8rem 2rem;
     font-size: 1.1em;
     font-weight: 700;
-    border-radius: 50px; 
+    border-radius: 50px;
     cursor: pointer;
     text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
 }
 .access-button:hover {
     background-color: #333;
     color: white;
 }
-body.light-theme .premium-unlock {
-    box-shadow: 0 4px 20px rgba(142, 68, 173, 0.4);
-}
-body.light-theme .access-button {
-    color: var(--primary-color);
-}
 
-/* -------------------- Market Pulse Section -------------------- */
+
+/* -------------------- Market Pulse -------------------- */
 .pulse-section {
-    text-align: center; 
-    margin-bottom: 40px;
+    text-align: center;
+    margin-bottom: 2.5rem;
 }
 
 .market-pulse-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-bottom: 0;
-    text-align: left; 
+    gap: 1.5rem;
 }
 
 .pulse-card {
-    padding: 20px;
+    padding: 1.5rem;
     background-color: var(--card-color);
     border: 1px solid var(--border-color);
     border-radius: 12px;
     transition: background-color 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
 }
-
 .pulse-card:hover {
     transform: translateY(-5px) scale(1.02);
     border-color: var(--secondary-color);
     box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
 }
-body.light-theme .pulse-card:hover {
-    box-shadow: 0 10px 20px rgba(52, 152, 219, 0.1);
-}
 
-.pulse-card h4 {
-    font-size: 1em;
-    color: var(--secondary-color);
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
-.pulse-card h3 {
-    font-size: 1.25em;
-    margin-top: 0;
-    margin-bottom: 5px;
-}
 
-/* -------------------- Footer and Disclaimer -------------------- */
+/* -------------------- Footer -------------------- */
 .about-section {
-    padding: 30px;
-    background-color: var(--card-color); 
+    padding: 2rem;
+    background-color: var(--card-color);
     border-radius: 12px;
-    margin-top: 40px;
     border: 1px solid var(--border-color);
-    transition: background-color 0.3s, border-color 0.3s;
 }
+
 .disclaimer-section {
-    margin-top: 30px;
-    padding: 25px;
+    margin-top: 2rem;
+    padding: 1.5rem;
     border: 1px dashed var(--danger-color);
-    background-color: rgba(231, 76, 60, 0.05); 
+    background-color: rgba(231, 76, 60, 0.05);
     border-radius: 12px;
     font-size: 0.9em;
     color: var(--danger-color);
-    transition: background-color 0.3s, border-color 0.3s;
-}
-body.light-theme .disclaimer-section {
-    background-color: rgba(192, 57, 43, 0.05);
-    color: var(--danger-color);
 }
 .footer {
-    margin-top: 40px;
-    padding-top: 20px;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
     border-top: 1px solid var(--border-color);
     text-align: center;
     font-size: 0.85em;
     color: var(--light-text);
-    transition: border-color 0.3s;
 }
 
-/* -------------------- Media Query -------------------- */
+
+/* -------------------- RESPONSIVE MEDIA QUERIES -------------------- */
+
+
+/* Mobile (<600px) */
 @media (max-width: 600px) {
+    .container { padding: 1.5rem 1rem; }
+
+
+    /* Keep header in a single row on mobile but allow the logo to shrink */
+    .header {
+        display: flex;
+        flex-direction: row;           /* keep in a row */
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding: 0.6rem 0;
+        margin-bottom: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+    }
+
+    /* Logo can grow and shrink, but not force overflow */
+    .logo {
+        flex: 1 1 0;                   /* allow it to take remaining space */
+        min-width: 0;                  /* allow text to truncate if needed */
+        text-align: left;
+        margin: 0;
+        font-size: clamp(1.2rem, 5vw, 1.6rem);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Nav actions stay on the right, do not wrap into multiple lines */
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        justify-content: flex-end;
+        flex: 0 0 auto;                /* do not stretch */
+        white-space: nowrap;
+    }
+
+    /* Ensure individual controls don't wrap and can shrink */
+    .nav-actions > * {
+        flex: 0 0 auto;
+    }
+
+    /* Slightly smaller buttons and prevent width blowout */
+    .nav-button {
+        padding: 0.45rem 0.9rem;
+        font-size: 0.95rem;
+        border-radius: 40px;
+        white-space: nowrap;
+        display: inline-block;
+        max-width: 160px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        box-sizing: border-box;
+    }
+
+    .theme-toggle-btn {
+        padding: 0.4rem 0.6rem;
+        border-radius: 40px;
+        flex: 0 0 auto;
+    }
+
     .offer-cards {
         flex-direction: column;
-        align-items: center; 
+        align-items: center;
     }
     .offer-card {
         max-width: 100%;
-        width: 90%; 
+        width: 90%;
     }
-    .logo {
-        font-size: 1.6em;
-    }
-    .nav-actions {
-        gap: 10px;
-    }
-    .nav-button {
-        padding: 8px 15px;
-        font-size: 0.9em;
-    }
+
     .premium-features li {
-        padding: 0 10px;
+        padding: 0 0.5rem;
     }
+
+    .market-pulse-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    /* .disclaimer-small{
+        padding: 15%;
+    } */
+}
+
+
+/* Tablets (600px–992px) */
+@media (min-width: 601px) and (max-width: 992px) {
+    .container { padding: 3rem 2rem; }
+    .offer-cards { flex-wrap: wrap; }
+    .offer-card { flex: 1 1 45%; max-width: 45%; }
+    .premium-unlock { padding: 2.5rem; }
+    h2 { font-size: clamp(1.6rem, 2vw, 2.2rem); }
+    .market-pulse-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+/* Desktops (>992px) */
+@media (min-width: 993px) {
+    .container { max-width: 1100px; }
+    .market-pulse-grid { grid-template-columns: repeat(3, 1fr); }
 }
