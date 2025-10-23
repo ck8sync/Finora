@@ -12,6 +12,11 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!name.trim()) {
+      alert("Name is required.");
+      return;
+    }
+
     if (password !== confirmPassword) {
       alert("Passwords don't match");
       return;
@@ -51,6 +56,7 @@ const Register = () => {
           placeholder="Your legal name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          autoComplete="name"
         />
       </div>
       <div className="form-group">
@@ -62,6 +68,7 @@ const Register = () => {
           placeholder="Your primary email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
         />
       </div>
       <div className="form-group">
@@ -73,6 +80,7 @@ const Register = () => {
           placeholder="For security/recovery"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
+          autoComplete="tel"
         />
       </div>
       <div className="form-group">
@@ -84,6 +92,7 @@ const Register = () => {
           placeholder="Minimum 8 characters"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          autoComplete="new-password"
         />
       </div>
       <div className="form-group">
@@ -95,6 +104,7 @@ const Register = () => {
           placeholder="Repeat password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          autoComplete="new-password"
         />
       </div>
       <button type="submit" className="action-button">

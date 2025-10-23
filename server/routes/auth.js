@@ -23,11 +23,11 @@ function signToken(payload, options = {}) {
 // Register endpoint
 router.post('/register', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, phoneNumber, password } = req.body;
 
     // Basic validation
-    if (!email || !password) {
-      return res.status(400).json({ message: 'Email and password are required' });
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: 'Name, email, and password are required' });
     }
 
     // Check if user already exists
@@ -41,7 +41,9 @@ router.post('/register', async (req, res) => {
 
     // Create new user
     user = new User({
+      name,
       email,
+      phoneNumber,
       password: hashedPassword,
     });
 

@@ -42,3 +42,5 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log('JWT_SECRET set:', !!process.env.JWT_SECRET);
 });
+
+module.exports = app;
