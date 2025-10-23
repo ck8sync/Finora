@@ -1,18 +1,21 @@
 {
+  "functions": {
+    "api/server.js": {
+      "runtime": "@vercel/node",
+      "includeFiles": ["api/package.json", "api/.env", "api/routes/**", "api/models/**"],
+      "installCommand": "npm install --prefix api"
+    }
+  },
   "builds": [
     {
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": { "distDir": "dist" }
-    },
-    {
-      "src": "api/server.js",
-      "use": "@vercel/node",
-      "config": { "includeFiles": ["api/package.json", "api/.env"], "installCommand": "npm install --prefix api" }
     }
   ],
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/server.js" },
+    { "source": "/favicon.ico", "destination": "/client/public/favicon.ico" },
     { "source": "/(.*)", "destination": "/client/$1" }
   ]
 }
