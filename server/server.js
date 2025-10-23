@@ -11,7 +11,7 @@ const app = express();
 // For development, set origin to 'http://localhost:5173'.
 // If you need cookies/auth, set credentials: true and use an exact origin (not '*').
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: ['http://localhost:5173', 'https://finora-eight.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
