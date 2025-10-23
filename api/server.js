@@ -46,4 +46,7 @@ if (!process.env.VERCEL_ENV) {
   });
 }
 
-module.exports = app;
+module.exports = async (req, res) => {
+  await mongoose.connection.asPromise(); // Ensure MongoDB is connected
+  app(req, res);
+};
