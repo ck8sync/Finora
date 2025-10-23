@@ -1,7 +1,22 @@
 {
+  "functions": {
+    "api/server.js": {
+      "runtime": "@vercel/node@3.x",
+      "includeFiles": "api/package.json,api/.env,api/routes/**,api/models/**"
+    }
+  },
+  "builds": [
+    {
+      "src": "client/index.html",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "client/dist" }
+    }
+  ],
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/server.js" },
     { "source": "/favicon.ico", "destination": "/client/public/favicon.ico" },
     { "source": "/(.*)", "destination": "/client/$1" }
-  ]
+  ],
+  "installCommand": "npm install --prefix client && npm install --prefix api",
+  "buildCommand": "npm run build --prefix client"
 }
