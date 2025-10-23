@@ -8,7 +8,7 @@
     {
       "src": "api/server.js",
       "use": "@vercel/node",
-      "config": { "includeFiles": ["api/package.json", "api/.env"] }
+      "config": { "includeFiles": ["api/package.json", "api/.env"], "installCommand": "npm install --prefix api" }
     }
   ],
   "rewrites": [
