@@ -4,10 +4,31 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
+// Load environment variables from .env in development
+require('dotenv').config();
+
+/**
+ * Helper to sign JWTs and provide a clear error when JWT_SECRET is missing.
+ * Throws an error with message 'JWT_SECRET_NOT_CONFIGURED' when the secret isn't set.
+ */
+function signToken(payload, options = {}) {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    const err = new Error('JWT_SECRET_NOT_CONFIGURED');
+    throw err;
+  }
+  return jwt.sign(payload, secret, options);
+}
+
 // Register endpoint
 router.post('/register', async (req, res) => {
   try {
-    const { email, password, name, phone } = req.body;
+    const { email, password } = req.body;
+
+    // Basic validation
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
+    }
 
     // Check if user already exists
     let user = await User.findOne({ email });
@@ -26,8 +47,17 @@ router.post('/register', async (req, res) => {
 
     await user.save();
 
-    // Generate a JWT token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    // Generate a JWT token (will throw if JWT_SECRET is missing)
+    let token;
+    try {
+      token = signToken({ userId: user._id }, { expiresIn: '1h' });
+    } catch (err) {
+      if (err.message === 'JWT_SECRET_NOT_CONFIGURED') {
+        console.error('JWT secret not configured. Set JWT_SECRET in your environment or .env file.');
+        return res.status(500).json({ message: 'Server configuration error: JWT secret not set' });
+      }
+      throw err;
+    }
 
     res.status(201).json({ message: 'User registered successfully', token });
   } catch (error) {
@@ -45,6 +75,11 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    // Basic validation
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
+    }
+
     // Find the user in the database
     const user = await User.findOne({ email });
 
@@ -59,8 +94,17 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    // Generate a JWT token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    // Generate a JWT token (will throw if JWT_SECRET is missing)
+    let token;
+    try {
+      token = signToken({ userId: user._id }, { expiresIn: '1h' });
+    } catch (err) {
+      if (err.message === 'JWT_SECRET_NOT_CONFIGURED') {
+        console.error('JWT secret not configured. Set JWT_SECRET in your environment or .env file.');
+        return res.status(500).json({ message: 'Server configuration error: JWT secret not set' });
+      }
+      throw err;
+    }
 
     res.status(200).json({ message: 'Login successful', token });
   } catch (error) {
@@ -74,14 +118,28 @@ router.post('/forgot-password', async (req, res) => {
   try {
     const { email } = req.body;
 
+    if (!email) {
+      return res.status(400).json({ message: 'Email is required' });
+    }
+
     // Check if user exists
     const user = await User.findOne({ email });
     if (!user) {
+      // You may choose to return 200 here to prevent email enumeration
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Generate password reset token
-    const resetToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    // Generate password reset token (will throw if JWT_SECRET is missing)
+    let resetToken;
+    try {
+      resetToken = signToken({ userId: user._id }, { expiresIn: '1h' });
+    } catch (err) {
+      if (err.message === 'JWT_SECRET_NOT_CONFIGURED') {
+        console.error('JWT secret not configured. Set JWT_SECRET in your environment or .env file.');
+        return res.status(500).json({ message: 'Server configuration error: JWT secret not set' });
+      }
+      throw err;
+    }
 
     // Set reset token and expiry
     user.resetToken = resetToken;
@@ -90,7 +148,7 @@ router.post('/forgot-password', async (req, res) => {
 
     // Send email to user with reset link
     const resetLink = `http://localhost:5173/reset-password/${resetToken}`; // TODO: Use environment variable for client URL
-    console.log(resetLink); // TODO: Implement email sending
+    console.log('Password reset link (send via email in production):', resetLink); // TODO: Implement email sending
 
     res.status(200).json({ message: 'Password reset link sent to your email' });
   } catch (error) {
@@ -103,6 +161,10 @@ router.post('/forgot-password', async (req, res) => {
 router.post('/reset-password', async (req, res) => {
   try {
     const { token, password } = req.body;
+
+    if (!token || !password) {
+      return res.status(400).json({ message: 'Token and new password are required' });
+    }
 
     // Find user with reset token and expiry
     const user = await User.findOne({

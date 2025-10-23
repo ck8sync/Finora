@@ -9,14 +9,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', { // TODO: Use environment variable for server URL
+      // console.log({ email, password });
+      const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // only if you use cookies/session auth and server sets credentials:true
+        body: JSON.stringify({ email, password })
       });
-
+      
       const data = await response.json();
 
       if (response.ok) {
