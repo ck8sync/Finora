@@ -38,9 +38,12 @@ app.use('/api/auth', authRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log('JWT_SECRET set:', !!process.env.JWT_SECRET);
-});
+// Only listen on a port if not in a Vercel environment
+if (!process.env.VERCEL_ENV) {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log('JWT_SECRET set:', !!process.env.JWT_SECRET);
+  });
+}
 
 module.exports = app;
