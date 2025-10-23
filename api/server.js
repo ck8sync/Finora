@@ -34,7 +34,10 @@ mongoose
   });
 
 // Routes
-app.use('/api/auth', authRoutes);
+const protectedRoutes = require('./routes/protected');
+
+app.use('/auth', authRoutes);
+app.use('/protected', protectedRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;
