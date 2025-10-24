@@ -89,8 +89,9 @@ router.post('/forgot-password', async (req, res) => {
     await user.save();
 
     // Send email to user with reset link
-    const resetLink = `http://localhost:5173/reset-password/${resetToken}`; // TODO: Use environment variable for client URL
-    console.log(resetLink); // TODO: Implement email sending
+    const resetLink = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+    // TODO: Implement email sending logic here
+    console.log(resetLink);
 
     res.status(200).json({ message: 'Password reset link sent to your email' });
   } catch (error) {
