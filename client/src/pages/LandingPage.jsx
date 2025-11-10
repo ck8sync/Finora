@@ -36,24 +36,7 @@ function LandingPage() {
                 </div>
             </header>
 
-            <div className="market-ticker">
-                <div className="ticker-inner">
-                    <span className="ticker-item">NIFTY <span className="change up">▲ 0.8%</span></span>
-                    <span className="ticker-item">SENSEX <span className="change up">▲ 0.6%</span></span>
-                    <span className="ticker-item">BANKNIFTY <span className="change down">▼ 0.2%</span></span>
-                    <span className="ticker-item">GOLD <span className="change up">▲ 0.4%</span></span>
-                    <span className="ticker-item">BTC <span className="change down">▼ 1.3%</span></span>
-                    <span className="ticker-item">NASDAQ <span className="change up">▲ 0.9%</span></span>
-                    
-                    <span className="ticker-item">NIFTY <span className="change up">▲ 0.8%</span></span>
-                    <span className="ticker-item">SENSEX <span className="change up">▲ 0.6%</span></span>
-                    <span className="ticker-item">BANKNIFTY <span className="change down">▼ 0.2%</span></span>
-                    <span className="ticker-item">GOLD <span className="change up">▲ 0.4%</span></span>
-                    <span className="ticker-item">BTC <span className="change down">▼ 1.3%</span></span>
-                    <span className="ticker-item">NASDAQ <span className="change up">▲ 0.9%</span></span>
-                </div>
-            </div>
-            
+           
             <section className="hero-section">
                 <h2>Level Up Your Investing IQ</h2>
                 <p className="subtitle">Your fast track to market mastery. Get daily insights, weekly breakdowns, and bite-sized lessons.</p>

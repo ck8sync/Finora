@@ -1,0 +1,58 @@
+/* Dashboard.css */
+
+.dashboard-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  .dashboard-container h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .dashboard-container p {
+    color: #7f8c8d;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+  }
+  
+  .user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-top: 1px solid #ecf0f1;
+  }
+  
+  .username {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #3498db; /* A nice blue color */
+  }
+  
+  .logout-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #e74c3c; /* A strong red for "log out" */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+  }
+  
+  .logout-button:active {
+    transform: translateY(0);
+  }
